@@ -4,6 +4,7 @@ import "express-async-errors";
 import "./loadEnvironment.mjs";
 import brands from './routes/brands.mjs'
 import products from './routes/products.mjs'
+import carts from './routes/carts.mjs'
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/api/brands', brands);
 app.use('/api/products', products)
+app.use('/api/carts', carts)
 
 // Global error handling
 app.use((err, _req, res, next) => {

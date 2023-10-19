@@ -26,9 +26,18 @@ router.get('/:brand_name', async(req, res) => {
 router.post('/add_product', async(req, res) => {
     const collection = db.collection("products")
     const params = req.body;
-    const result = await collection.insertOne(params)
-    console.log(result)
-    res.status(200).send(result)
+
+    collection.countDocuments({name: req.body.name, brand_name: req.body.brand_name}, {limit:1})
+    .then(async(result) => {
+        if(result <= 0){
+            const insertedData = await collection.insertOne(params);
+            res.status(200).send(insertedData)
+        }
+        else{
+            res.status(500).send({error: true, message:"Product already exits"})
+        }
+    })
+   
 })
 
 
