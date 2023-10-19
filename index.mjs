@@ -2,7 +2,8 @@ import cors from "cors";
 import express from "express";
 import "express-async-errors";
 import "./loadEnvironment.mjs";
-import brands from "./routes/brands.mjs"
+import brands from './routes/brands.mjs'
+import products from './routes/products.mjs'
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/brands', brands);
+app.use('/api/products', products)
 
 // Global error handling
 app.use((err, _req, res, next) => {
