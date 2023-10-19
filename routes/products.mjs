@@ -16,7 +16,7 @@ router.get('/', async(req, res) => {
 router.get('/:brand_name', async(req, res) => {
     const collection = db.collection("products")
     const result = await collection.find({
-        brand_name: req.query.brand_name
+        brand_name: req.params.brand_name
     }).toArray()
 
     res.send(result).status(200)
@@ -32,6 +32,15 @@ router.post('/add_product', async(req, res) => {
 })
 
 
+router.get('/:brand/:product', async(req, res) => {
+    const collection = db.collection("products")
+    const result = await collection.findOne({
+        brand_name: req.params.brand,
+        name: req.params.product
+    })
+
+    res.send(result).status(200);
+})
 
 
 export default router
