@@ -26,5 +26,4 @@ router.post('/addToCart', async (req, res) => {
     .catch( err => res.status(500).send({error:true, message: "Error while adding to cart"}))
 })
 
-
 export default router
